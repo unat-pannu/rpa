@@ -1,0 +1,451 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="UiPath_Main" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:umae="clr-namespace:UiPath.Mail.Activities.Enums;assembly=UiPath.Mail.Activities" xmlns:umame="clr-namespace:UiPath.MicrosoftOffice365.Activities.Mail.Enums;assembly=UiPath.Mail.Activities" xmlns:usau="clr-namespace:UiPath.Shared.Activities.Utils;assembly=UiPath.Mail.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="WebsiteURL" Type="InArgument(x:String)" />
+    <x:Property Name="NotificationEmail" Type="InArgument(x:String)" />
+    <x:Property Name="SMTPHost" Type="InArgument(x:String)" />
+    <x:Property Name="SMTPPort" Type="InArgument(x:Int32)" />
+    <x:Property Name="SMTPUsername" Type="InArgument(x:String)" />
+    <x:Property Name="SMTPPassword" Type="InArgument(x:String)" />
+    <x:Property Name="CheckIntervalMinutes" Type="InArgument(x:Int32)" />
+    <x:Property Name="DropThreshold" Type="InArgument(x:Double)" />
+  </x:Members>
+  <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Numerics</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>UiPath.MicrosoftOffice365.Activities.Mail.Enums</x:String>
+      <x:String>UiPath.Shared.Activities.Utils</x:String>
+      <x:String>UiPath.Mail</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>UiPath.Mail.Activities.Enums</x:String>
+      <x:String>UiPath.Mail.SMTP.Activities</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.Mail.Activities</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.ViewModels</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Testing.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities.Design</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Amazon Cart Price Tracker" sap:VirtualizedContainerService.HintSize="1274,8732" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[New System.Collections.Generic.List(Of String)()]" Name="cartItems" />
+      <Variable x:TypeArguments="scg:Dictionary(x:String, x:Double)" Default="[New System.Collections.Generic.Dictionary(Of String, Double)()]" Name="cartPrices" />
+      <Variable x:TypeArguments="scg:Dictionary(x:String, x:Double)" Default="[New System.Collections.Generic.Dictionary(Of String, Double)()]" Name="previousPrices" />
+      <Variable x:TypeArguments="scg:List(x:String)" Default="[New System.Collections.Generic.List(Of String)()]" Name="priceDropItems" />
+      <Variable x:TypeArguments="x:String" Default="[&quot;&quot;]" Name="emailBody" />
+      <Variable x:TypeArguments="x:String" Default="[&quot;&quot;]" Name="dynamicEmailSubject" />
+      <Variable x:TypeArguments="x:String" Default="[&quot;&quot;]" Name="currentItemName" />
+      <Variable x:TypeArguments="x:String" Default="[&quot;&quot;]" Name="rawPriceText" />
+      <Variable x:TypeArguments="x:Double" Default="[0.0]" Name="currentPrice" />
+      <Variable x:TypeArguments="x:Double" Default="[0.0]" Name="previousPrice" />
+      <Variable x:TypeArguments="x:Int32" Default="[0]" Name="droppedItemCount" />
+      <Variable x:TypeArguments="x:Int32" Default="[0]" Name="iterationCount" />
+      <Variable x:TypeArguments="x:String" Default="[System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, &quot;PriceHistory.csv&quot;)]" Name="priceFilePath" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="1. Initialize - Log Bot Start" sap:VirtualizedContainerService.HintSize="716,173" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Amazon Cart Price Tracker started at &quot; + DateTime.Now.ToString(&quot;yyyy-MM-dd HH:mm:ss&quot;) + &quot; | Threshold: $&quot; + DropThreshold.ToString(&quot;F2&quot;) + &quot; | Interval: &quot; + CheckIntervalMinutes.ToString() + &quot; min&quot;]" />
+    <Sequence DisplayName="2. Load Previous Price History from CSV" sap:VirtualizedContainerService.HintSize="716,1720" sap2010:WorkflowViewState.IdRef="Sequence_6">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <If Condition="[System.IO.File.Exists(priceFilePath)]" DisplayName="Does PriceHistory.csv Exist?" sap:VirtualizedContainerService.HintSize="620,1628" sap2010:WorkflowViewState.IdRef="If_1">
+        <If.Then>
+          <Sequence DisplayName="Read and Parse Saved Prices" sap:VirtualizedContainerService.HintSize="586,1078" sap2010:WorkflowViewState.IdRef="Sequence_4">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ForEach x:TypeArguments="x:String" DisplayName="For Each Row in CSV" sap:VirtualizedContainerService.HintSize="552,854" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[New System.Collections.Generic.List(Of String)(System.IO.File.ReadAllLines(priceFilePath))]">
+              <ActivityAction x:TypeArguments="x:String">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="x:String" Name="csvRow" />
+                </ActivityAction.Argument>
+                <If Condition="[Not csvRow.StartsWith(&quot;ItemName&quot;) AndAlso csvRow.Contains(&quot;,&quot;)]" DisplayName="Skip Header Row" sap:VirtualizedContainerService.HintSize="502,674" sap2010:WorkflowViewState.IdRef="If_2">
+                  <If.Then>
+                    <Sequence DisplayName="Parse CSV Row into Dictionary" sap:VirtualizedContainerService.HintSize="468,447" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <Assign DisplayName="Extract Item Name" sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="Assign_1">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[currentItemName]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">[csvRow.Split(","c)(0).Trim()]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <Assign DisplayName="Extract Previous Price" sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="Assign_2">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:Double">[previousPrice]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:Double">[Double.Parse(csvRow.Split(","c)(1).Trim())]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <InvokeMethod DisplayName="Invoke Method" sap:VirtualizedContainerService.HintSize="434,159" sap2010:WorkflowViewState.IdRef="InvokeMethod_1" MethodName="set_Item">
+                        <InvokeMethod.TargetObject>
+                          <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Double)">[previousPrices]</InArgument>
+                        </InvokeMethod.TargetObject>
+                        <InArgument x:TypeArguments="x:String">
+                          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="currentItemName" />
+                        </InArgument>
+                        <InArgument x:TypeArguments="x:Double">
+                          <VisualBasicValue x:TypeArguments="x:Double" ExpressionText="previousPrice" />
+                        </InArgument>
+                      </InvokeMethod>
+                    </Sequence>
+                  </If.Then>
+                  <If.Else>
+                    <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,89" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </Sequence>
+                  </If.Else>
+                </If>
+              </ActivityAction>
+            </ForEach>
+            <ui:LogMessage DisplayName="Log: Previous Prices Loaded" sap:VirtualizedContainerService.HintSize="552,164" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Loaded &quot; + previousPrices.Count.ToString() + &quot; previously tracked item(s)&quot;]" />
+          </Sequence>
+        </If.Then>
+        <If.Else>
+          <Sequence DisplayName="Create New CSV with Header" sap:VirtualizedContainerService.HintSize="416,389" sap2010:WorkflowViewState.IdRef="Sequence_5">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:WriteTextFile File="{x:Null}" DisplayName="Write Text File" FileName="[priceFilePath]" sap:VirtualizedContainerService.HintSize="382,165" sap2010:WorkflowViewState.IdRef="WriteTextFile_1" Text="ItemName,LastPrice,LastChecked,URL" />
+            <ui:LogMessage DisplayName="Log: New CSV Created" sap:VirtualizedContainerService.HintSize="382,164" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;No price history found. Created new file: &quot; + priceFilePath]" />
+          </Sequence>
+        </If.Else>
+      </If>
+    </Sequence>
+    <DoWhile DisplayName="3. Main Price Monitoring Loop (Runs Continuously)" sap:VirtualizedContainerService.HintSize="716,6816" sap2010:WorkflowViewState.IdRef="DoWhile_1" Condition="[True]">
+      <Sequence DisplayName="One Full Monitoring Cycle" sap:VirtualizedContainerService.HintSize="670,6629" sap2010:WorkflowViewState.IdRef="Sequence_17">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <Assign DisplayName="Increment Cycle Counter" sap:VirtualizedContainerService.HintSize="636,114" sap2010:WorkflowViewState.IdRef="Assign_3">
+          <Assign.To>
+            <OutArgument x:TypeArguments="x:Int32">[iterationCount]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="x:Int32">[iterationCount + 1]</InArgument>
+          </Assign.Value>
+        </Assign>
+        <ui:LogMessage DisplayName="Log: Cycle Start" sap:VirtualizedContainerService.HintSize="636,173" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;=== Cycle #&quot; + iterationCount.ToString() + &quot; started at &quot; + DateTime.Now.ToString(&quot;HH:mm:ss&quot;) + &quot; ===&quot;]" />
+        <InvokeMethod DisplayName="Invoke Method" sap:VirtualizedContainerService.HintSize="636,168" sap2010:WorkflowViewState.IdRef="InvokeMethod_2" MethodName="Clear">
+          <InvokeMethod.TargetObject>
+            <InArgument x:TypeArguments="scg:List(x:String)">[cartItems]</InArgument>
+          </InvokeMethod.TargetObject>
+        </InvokeMethod>
+        <InvokeMethod DisplayName="Invoke Method" sap:VirtualizedContainerService.HintSize="636,168" sap2010:WorkflowViewState.IdRef="InvokeMethod_3" MethodName="Clear">
+          <InvokeMethod.TargetObject>
+            <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Double)">[cartPrices]</InArgument>
+          </InvokeMethod.TargetObject>
+        </InvokeMethod>
+        <InvokeMethod DisplayName="Invoke Method" sap:VirtualizedContainerService.HintSize="636,168" sap2010:WorkflowViewState.IdRef="InvokeMethod_4" MethodName="Clear">
+          <InvokeMethod.TargetObject>
+            <InArgument x:TypeArguments="scg:List(x:String)">[priceDropItems]</InArgument>
+          </InvokeMethod.TargetObject>
+        </InvokeMethod>
+        <Sequence DisplayName="3A. Open Browser and Scrape Amazon Cart" sap:VirtualizedContainerService.HintSize="636,378" sap2010:WorkflowViewState.IdRef="Sequence_7">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:LogMessage DisplayName="Log: Opening Amazon Cart" sap:VirtualizedContainerService.HintSize="416,173" sap2010:WorkflowViewState.IdRef="LogMessage_9" Level="Info" Message="[&quot;Navigating to: &quot; + WebsiteURL]" />
+          <Delay DisplayName="Wait 3s for Page Load" Duration="[TimeSpan.FromSeconds(3)]" sap:VirtualizedContainerService.HintSize="416,113" sap2010:WorkflowViewState.IdRef="Delay_2" />
+        </Sequence>
+        <Sequence DisplayName="3B. Parse Scraped Cart Data into Collections" sap:VirtualizedContainerService.HintSize="636,256" sap2010:WorkflowViewState.IdRef="Sequence_8">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:LogMessage DisplayName="Log: Parsing Scraped Items" sap:VirtualizedContainerService.HintSize="416,164" sap2010:WorkflowViewState.IdRef="LogMessage_10" Level="Info" Message="[&quot;Parsing &quot; + cartItems.Count.ToString() + &quot; item(s) scraped from cart&quot;]" />
+        </Sequence>
+        <Sequence DisplayName="3C. Compare Prices and Detect Drops" sap:VirtualizedContainerService.HintSize="636,1999" sap2010:WorkflowViewState.IdRef="Sequence_12">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:LogMessage DisplayName="Log: Comparing Prices" sap:VirtualizedContainerService.HintSize="602,173" sap2010:WorkflowViewState.IdRef="LogMessage_11" Level="Info" Message="[&quot;Comparing current cart prices against saved history...&quot;]" />
+          <ForEach x:TypeArguments="x:String" DisplayName="For Each Cart Item - Check for Drop" sap:VirtualizedContainerService.HintSize="602,1570" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[cartItems]">
+            <ActivityAction x:TypeArguments="x:String">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="x:String" Name="itemName" />
+              </ActivityAction.Argument>
+              <Sequence DisplayName="Compare This Item" sap:VirtualizedContainerService.HintSize="552,1388" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <Assign DisplayName="Get Current Price" sap:VirtualizedContainerService.HintSize="518,114" sap2010:WorkflowViewState.IdRef="Assign_4">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:Double">[currentPrice]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:Double">[cartPrices(itemName)]</InArgument>
+                  </Assign.Value>
+                </Assign>
+                <If Condition="[previousPrices.ContainsKey(itemName)]" DisplayName="Has Previous Price for This Item?" sap:VirtualizedContainerService.HintSize="518,1214" sap2010:WorkflowViewState.IdRef="If_5">
+                  <If.Then>
+                    <Sequence DisplayName="Compare Old vs New" sap:VirtualizedContainerService.HintSize="484,890" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <Assign DisplayName="Get Previous Price" sap:VirtualizedContainerService.HintSize="450,114" sap2010:WorkflowViewState.IdRef="Assign_5">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:Double">[previousPrice]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:Double">[previousPrices(itemName)]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <If Condition="[currentPrice &lt; previousPrice AndAlso (previousPrice - currentPrice) &gt;= DropThreshold AndAlso currentPrice &gt; 0]" DisplayName="Price Dropped by At Least DropThreshold?" sap:VirtualizedContainerService.HintSize="450,716" sap2010:WorkflowViewState.IdRef="If_4">
+                        <If.Then>
+                          <Sequence DisplayName="Record This Price Drop" sap:VirtualizedContainerService.HintSize="416,392" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <InvokeMethod DisplayName="Invoke Method" sap:VirtualizedContainerService.HintSize="382,168" sap2010:WorkflowViewState.IdRef="InvokeMethod_5" MethodName="Add">
+                              <InvokeMethod.TargetObject>
+                                <InArgument x:TypeArguments="scg:List(x:String)">[priceDropItems]</InArgument>
+                              </InvokeMethod.TargetObject>
+                              <InArgument x:TypeArguments="x:String">
+                                <VisualBasicValue x:TypeArguments="x:String" ExpressionText="itemName + &quot;|&quot; + previousPrice.ToString(&quot;F2&quot;) + &quot;|&quot; + currentPrice.ToString(&quot;F2&quot;)" />
+                              </InArgument>
+                            </InvokeMethod>
+                            <ui:LogMessage DisplayName="Log: Price Drop Recorded" sap:VirtualizedContainerService.HintSize="382,164" sap2010:WorkflowViewState.IdRef="LogMessage_12" Level="Info" Message="[&quot;PRICE DROP: &quot; + itemName + &quot; | Was $&quot; + previousPrice.ToString(&quot;F2&quot;) + &quot; Now $&quot; + currentPrice.ToString(&quot;F2&quot;) + &quot; | Saved $&quot; + (previousPrice - currentPrice).ToString(&quot;F2&quot;)]" />
+                          </Sequence>
+                        </If.Then>
+                        <If.Else>
+                          <ui:LogMessage DisplayName="Log: No Drop for This Item" sap:VirtualizedContainerService.HintSize="334,141" sap2010:WorkflowViewState.IdRef="LogMessage_13" Level="Trace" Message="[&quot;No drop: &quot; + itemName + &quot; still $&quot; + currentPrice.ToString(&quot;F2&quot;)]" />
+                        </If.Else>
+                      </If>
+                    </Sequence>
+                  </If.Then>
+                  <If.Else>
+                    <ui:LogMessage DisplayName="Log: New Item First Seen" sap:VirtualizedContainerService.HintSize="334,141" sap2010:WorkflowViewState.IdRef="LogMessage_14" Level="Info" Message="[&quot;New item tracked: &quot; + itemName + &quot; at $&quot; + currentPrice.ToString(&quot;F2&quot;)]" />
+                  </If.Else>
+                </If>
+              </Sequence>
+            </ActivityAction>
+          </ForEach>
+          <ui:LogMessage DisplayName="Log: Comparison Complete" sap:VirtualizedContainerService.HintSize="602,164" sap2010:WorkflowViewState.IdRef="LogMessage_15" Level="Info" Message="[&quot;Comparison done. Drops found: &quot; + priceDropItems.Count.ToString() + &quot; / &quot; + cartItems.Count.ToString() + &quot; items&quot;]" />
+        </Sequence>
+        <Sequence DisplayName="3D. Build Dynamic Email Subject" sap:VirtualizedContainerService.HintSize="636,484" sap2010:WorkflowViewState.IdRef="Sequence_13">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Assign DisplayName="Set Dropped Item Count" sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="Assign_6">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:Int32">[droppedItemCount]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:Int32">[priceDropItems.Count]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <Assign DisplayName="Build Email Subject Dynamically" sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="Assign_7">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[dynamicEmailSubject]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">["Price Drop Alert! " + droppedItemCount.ToString() + " item(s) dropped by $" + DropThreshold.ToString("F2") + "+ | " + DateTime.Now.ToString("MMM dd yyyy HH:mm")]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <ui:LogMessage DisplayName="Log: Email Subject Built" sap:VirtualizedContainerService.HintSize="434,164" sap2010:WorkflowViewState.IdRef="LogMessage_16" Level="Info" Message="[&quot;Email subject: &quot; + dynamicEmailSubject]" />
+        </Sequence>
+        <If Condition="[priceDropItems.Count &gt; 0]" DisplayName="3E. Send Email if Price Drops Found" sap:VirtualizedContainerService.HintSize="636,1388" sap2010:WorkflowViewState.IdRef="If_3">
+          <If.Then>
+            <Sequence DisplayName="Build HTML Email and Send" sap:VirtualizedContainerService.HintSize="518,1055" sap2010:WorkflowViewState.IdRef="Sequence_14">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <Assign DisplayName="Start HTML Email Body" sap:VirtualizedContainerService.HintSize="484,114" sap2010:WorkflowViewState.IdRef="Assign_8">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[emailBody]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">["&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;body style='font-family:Arial,sans-serif;padding:20px'&gt;&lt;h2 style='color:#e44d26'&gt;Price Drop Alert - Amazon Cart&lt;/h2&gt;&lt;p&gt;The following items dropped by at least $" + DropThreshold.ToString("F2") + ":&lt;/p&gt;"]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <ForEach x:TypeArguments="x:String" DisplayName="For Each Dropped Item - Build Email Card" sap:VirtualizedContainerService.HintSize="484,262" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[priceDropItems]">
+                <ActivityAction x:TypeArguments="x:String">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="x:String" Name="dropEntry" />
+                  </ActivityAction.Argument>
+                  <Assign DisplayName="Append Item Card to Email" sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_9">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[emailBody]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">[emailBody + "&lt;div style='background:#fff;border-radius:6px;padding:15px;margin:10px 0;border-left:4px solid #28a745'&gt;" + "&lt;strong&gt;" + dropEntry.Split("|"c)(0) + "&lt;/strong&gt;&lt;br/&gt;" + "Was: &lt;span style='text-decoration:line-through;color:#999'&gt;$" + dropEntry.Split("|"c)(1) + "&lt;/span&gt; &amp;nbsp; " + "Now: &lt;span style='color:#28a745;font-weight:bold'&gt;$" + dropEntry.Split("|"c)(2) + "&lt;/span&gt;&lt;br/&gt;" + "You save: &lt;b&gt;$" + (Double.Parse(dropEntry.Split("|"c)(1)) - Double.Parse(dropEntry.Split("|"c)(2))).ToString("F2") + "&lt;/b&gt;&lt;/div&gt;"]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                </ActivityAction>
+              </ForEach>
+              <Assign DisplayName="Close HTML Email Body" sap:VirtualizedContainerService.HintSize="484,114" sap2010:WorkflowViewState.IdRef="Assign_10">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[emailBody]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[emailBody + "&lt;p style='color:#888;font-size:0.85em'&gt;Checked: " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + " | Cart: " + WebsiteURL + "&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;"]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <ui:SendMail Bcc="{x:Null}" Cc="{x:Null}" ContinueOnError="{x:Null}" Email="{x:Null}" From="{x:Null}" MailMessage="{x:Null}" Name="{x:Null}" Password="{x:Null}" Port="{x:Null}" ReplyTo="{x:Null}" ResourceAttachmentList="{x:Null}" ResourceAttachments="{x:Null}" Result="{x:Null}" SecurePassword="{x:Null}" Server="{x:Null}" TimeoutMS="{x:Null}" UseOAuth="{x:Null}" AttachmentInputMode="Existing" Body="emailBody" ConnectionId="726b4052-f342-4268-8d31-158d38856fb0" DisplayName="Send SMTP Email" EnableSSL="True" sap:VirtualizedContainerService.HintSize="484,341" sap2010:WorkflowViewState.IdRef="SendMail_1" IgnoreCRL="False" IsBodyHtml="False" SecureConnection="Auto" Subject="[dynamicEmailSubject]" To="[NotificationEmail]" UseISConnection="True">
+                <ui:SendMail.AttachmentsBackup>
+                  <usau:BackupSlot x:TypeArguments="umame:AttachmentInputMode" StoredValue="Existing">
+                    <usau:BackupSlot.BackupValues>
+                      <scg:Dictionary x:TypeArguments="umame:AttachmentInputMode, scg:List(x:Object)" />
+                    </usau:BackupSlot.BackupValues>
+                  </usau:BackupSlot>
+                </ui:SendMail.AttachmentsBackup>
+                <ui:SendMail.ConnectionDetailsBackupSlot>
+                  <usau:BackupSlot x:TypeArguments="umae:ConnectionDetails" StoredValue="IntegrationService">
+                    <usau:BackupSlot.BackupValues>
+                      <scg:Dictionary x:TypeArguments="umae:ConnectionDetails, scg:List(x:Object)" />
+                    </usau:BackupSlot.BackupValues>
+                  </usau:BackupSlot>
+                </ui:SendMail.ConnectionDetailsBackupSlot>
+                <ui:SendMail.Files>
+                  <scg:List x:TypeArguments="InArgument(x:String)" Capacity="0" />
+                </ui:SendMail.Files>
+              </ui:SendMail>
+              <ui:LogMessage DisplayName="Log: Email Sent" sap:VirtualizedContainerService.HintSize="484,164" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Info" Message="[&quot;Email sent to &quot; + NotificationEmail + &quot; with subject: &quot; + dynamicEmailSubject]" />
+            </Sequence>
+          </If.Then>
+          <If.Else>
+            <ui:LogMessage DisplayName="Log: No Drops - No Email Sent" sap:VirtualizedContainerService.HintSize="334,141" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[&quot;No price drops met the threshold this cycle. No email sent.&quot;]" />
+          </If.Else>
+        </If>
+        <Sequence DisplayName="3F. Save Current Prices to CSV" sap:VirtualizedContainerService.HintSize="636,987" sap2010:WorkflowViewState.IdRef="Sequence_16">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:WriteTextFile File="{x:Null}" DisplayName="Write Text File" FileName="[priceFilePath]" sap:VirtualizedContainerService.HintSize="466,165" sap2010:WorkflowViewState.IdRef="WriteTextFile_2" Text="ItemName,LastPrice,LastChecked,URL" />
+          <ForEach x:TypeArguments="x:String" DisplayName="For Each Item - Write Row to CSV" sap:VirtualizedContainerService.HintSize="466,566" sap2010:WorkflowViewState.IdRef="ForEach`1_4" Values="[cartItems]">
+            <ActivityAction x:TypeArguments="x:String">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="x:String" Name="csvItem" />
+              </ActivityAction.Argument>
+              <Sequence DisplayName="Write Item Row and Update Dictionary" sap:VirtualizedContainerService.HintSize="416,384" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:AppendLine File="{x:Null}" DisplayName="Append Line" FileName="[priceFilePath]" sap:VirtualizedContainerService.HintSize="382,165" sap2010:WorkflowViewState.IdRef="AppendLine_1" Text="[csvItem + &quot;,&quot; + cartPrices(csvItem).ToString(&quot;F2&quot;) + &quot;,&quot; + DateTime.Now.ToString(&quot;yyyy-MM-dd HH:mm:ss&quot;) + &quot;,&quot; + WebsiteURL]" UseDefaultEncoding="False" />
+                <InvokeMethod DisplayName="Invoke Method" sap:VirtualizedContainerService.HintSize="382,159" sap2010:WorkflowViewState.IdRef="InvokeMethod_6" MethodName="set_Item">
+                  <InvokeMethod.TargetObject>
+                    <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Double)">[previousPrices]</InArgument>
+                  </InvokeMethod.TargetObject>
+                  <InArgument x:TypeArguments="x:String">
+                    <VisualBasicValue x:TypeArguments="x:String" ExpressionText="csvItem" />
+                  </InArgument>
+                  <InArgument x:TypeArguments="x:Double">
+                    <VisualBasicValue x:TypeArguments="x:Double" ExpressionText="cartPrices(csvItem)" />
+                  </InArgument>
+                </InvokeMethod>
+              </Sequence>
+            </ActivityAction>
+          </ForEach>
+          <ui:LogMessage DisplayName="Log: CSV Saved" sap:VirtualizedContainerService.HintSize="466,164" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Info" Message="[&quot;Prices saved to CSV. &quot; + cartItems.Count.ToString() + &quot; item(s) recorded.&quot;]" />
+        </Sequence>
+        <ui:LogMessage DisplayName="3G. Log: Sleeping Until Next Check" sap:VirtualizedContainerService.HintSize="636,173" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[&quot;Cycle #&quot; + iterationCount.ToString() + &quot; complete. Next check in &quot; + CheckIntervalMinutes.ToString() + &quot; minute(s)...&quot;]" />
+        <Delay DisplayName="Wait for Next Check Interval" Duration="[TimeSpan.FromMinutes(CheckIntervalMinutes)]" sap:VirtualizedContainerService.HintSize="636,113" sap2010:WorkflowViewState.IdRef="Delay_1" />
+      </Sequence>
+    </DoWhile>
+  </Sequence>
+</Activity>
